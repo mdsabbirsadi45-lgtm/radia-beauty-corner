@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radia Beauty Corner | Online Cosmetics Shop</title>
+<style>
+:root{--pink:#e94f91;--light:#fff0f6;--gold:#c89b3c;--ink:#33232c;--muted:#756670}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#fffafd;color:var(--ink)}
+header{background:linear-gradient(135deg,#ffe3ef,#fff8fb);padding:22px 16px;text-align:center;border-bottom:2px solid #f8d0e1}
+.logo{width:78px;height:78px;border:3px solid var(--gold);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--pink);font-weight:800;font-size:22px;box-shadow:0 3px 10px #e6b8cb}
+h1{margin:10px 0 4px;font-size:25px;color:#c83278}header p{margin:0;color:var(--muted)}
+.wrap{max-width:1000px;margin:auto;padding:16px}
+.notice{background:#fff0f6;border:1px solid #f5c8dc;border-radius:12px;padding:12px;margin:14px 0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+.btn{display:inline-block;border:0;border-radius:9px;padding:11px 14px;background:var(--pink);color:white;text-decoration:none;font-weight:700;cursor:pointer}
+.btn.secondary{background:#fff;color:#c83278;border:1px solid #e9a7c6}.btn.gold{background:var(--gold)}
+h2{font-size:21px;color:#c83278;margin:20px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.card{background:#fff;border:1px solid #f0d7e2;border-radius:13px;padding:12px;box-shadow:0 3px 10px #f8eaf0}
+.photo{height:110px;border-radius:9px;background:linear-gradient(135deg,#fff0f6,#fce4ec);display:flex;align-items:center;justify-content:center;font-size:35px;color:#cf5590}
+.card h3{font-size:16px;margin:10px 0 5px}.price{font-weight:800;color:#c83278;margin:5px 0 10px}
+.card button{width:100%;margin-top:5px}
+form{display:grid;gap:10px}input,textarea,select{width:100%;padding:11px;border:1px solid #e5c8d6;border-radius:8px;font:inherit;background:#fff}
+label{font-size:14px;font-weight:700}footer{text-align:center;background:#fff0f6;padding:20px;margin-top:28px;color:var(--muted);font-size:14px}
+#adminPanel{display:none;background:#fff;border:2px dashed #e9a7c6;border-radius:12px;padding:14px;margin-top:14px}
+.small{font-size:12px;color:var(--muted);line-height:1.5}
+@media(min-width:700px){header{padding:30px}.wrap{padding:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Radia</div>
+  <h1>Radia Beauty Corner</h1>
+  <p>আপনার পছন্দের সব ধরনের কসমেটিকস</p>
+  <div class="actions">
+    <a class="btn" href="https://wa.me/8801804115193?text=Assalamu%20Alaikum%2C%20Radia%20Beauty%20Corner%20থেকে%20অর্ডার%20করতে%20চাই" target="_blank" rel="noopener">WhatsApp অর্ডার ১</a>
+    <a class="btn secondary" href="https://wa.me/8801842860876?text=Assalamu%20Alaikum%2C%20Radia%20Beauty%20Corner%20থেকে%20অর্ডার%20করতে%20চাই" target="_blank" rel="noopener">WhatsApp অর্ডার ২</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="notice"><strong>ডেলিভারি:</strong> সারা বাংলাদেশে। ঢাকা শহরের ভিতরে ৮০ টাকা, ঢাকার বাইরে ১২০ টাকা। <br><strong>পেমেন্ট:</strong> Cash on Delivery, bKash ও Nagad। <br><strong>রিটার্ন/এক্সচেঞ্জ:</strong> ভুল বা ক্ষতিগ্রস্ত পণ্য হলে যোগাযোগ করুন।</div>
+  <h2>আমাদের পণ্য</h2>
+  <p class="small">পণ্যের ছবি, দাম ও বিবরণ যোগ করতে নিচের Admin Panel ব্যবহার করতে পারবেন। এই প্রাথমিক ভার্সনে পণ্য এই ব্রাউজার/ফোনে সেভ হবে; সবার ওয়েবসাইটে স্থায়ীভাবে দেখাতে পরে অনলাইন ডাটাবেস সংযুক্ত করতে হবে।</p>
+  <div id="products" class="grid"></div>
+  <h2>অর্ডার ফর্ম</h2>
+  <form id="orderForm">
+    <label>আপনার নাম<input name="customer" required placeholder="নাম লিখুন"></label>
+    <label>মোবাইল নম্বর<input name="phone" required inputmode="tel" placeholder="01XXXXXXXXX"></label>
+    <label>সম্পূর্ণ ঠিকানা<input name="address" required placeholder="বাড়ি, রোড, এলাকা, জেলা"></label>
+    <label>জেলা ও এলাকা<input name="district" required placeholder="জেলা ও এলাকার নাম"></label>
+    <label>পণ্যের নাম<input name="product" required id="orderProduct" placeholder="যে পণ্যটি নিতে চান"></label>
+    <label>পরিমাণ<input name="quantity" type="number" min="1" value="1" required></label>
+    <label>পেমেন্ট পদ্ধতি<select name="payment"><option>Cash on Delivery</option><option>bKash</option><option>Nagad</option></select></label>
+    <label>অতিরিক্ত নোট<textarea name="note" rows="3" placeholder="প্রয়োজনে লিখুন"></textarea></label>
+    <button class="btn" type="submit">WhatsApp-এ অর্ডার পাঠান</button>
+  </form>
+  <div class="actions">
+    <a class="btn secondary" href="https://www.instagram.com/mdsabbirahmed949/" target="_blank" rel="noopener">Instagram</a>
+    <a class="btn secondary" href="https://www.tiktok.com/@star.x.sajal307" target="_blank" rel="noopener">TikTok ১</a>
+    <a class="btn secondary" href="https://www.tiktok.com/@md.sabbir.sadi" target="_blank" rel="noopener">TikTok ২</a>
+    <a class="btn secondary" href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+  <div class="actions"><button class="btn gold" type="button" id="adminToggle">Admin Panel খুলুন</button></div>
+  <section id="adminPanel">
+    <h2>Admin Panel — পণ্য যোগ করুন</h2>
+    <form id="productForm">
+      <label>পণ্যের নাম<input name="name" required placeholder="যেমন: Face Wash"></label>
+      <label>দাম (টাকা)<input name="price" type="number" min="0" required placeholder="যেমন: 350"></label>
+      <label>ছবির লিংক (ঐচ্ছিক)<input name="image" type="url" placeholder="https://..."></label>
+      <label>বিবরণ<input name="description" placeholder="পণ্যের সংক্ষিপ্ত বিবরণ"></label>
+      <button class="btn" type="submit">পণ্য যোগ করুন</button>
+    </form>
+    <p class="small">মনে রাখবেন: এই Admin Panel এখনো পাসওয়ার্ড-সুরক্ষিত নয় এবং এখানে যোগ করা পণ্য শুধু এই ডিভাইসের ব্রাউজারে সেভ হয়। সবার জন্য স্থায়ীভাবে পণ্য আপডেট করতে নিরাপদ অনলাইন ডাটাবেস/অ্যাডমিন ব্যবস্থা লাগবে।</p>
+    <button class="btn secondary" type="button" id="exportProducts">পণ্যের তালিকা ডাউনলোড করুন (JSON)</button>
+  </section>
+</main>
+<footer>© <span id="year"></span> Radia Beauty Corner · Online Cosmetics Shop</footer>
+<script>
+const defaultProducts = [
+ {name:"লিপস্টিক",price:250,description:"আপনার পছন্দের শেড",emoji:"💄"},
+ {name:"ফেসওয়াশ",price:350,description:"দৈনন্দিন স্কিন কেয়ার",emoji:"🧴"},
+ {name:"মেকআপ কিট",price:650,description:"সৌন্দর্যচর্চার প্রয়োজনীয় পণ্য",emoji:"✨"}
+];
+let products=[];
+try{products=JSON.parse(localStorage.getItem("radiaProducts")||"null")||defaultProducts}catch(e){products=defaultProducts}
+function save(){try{localStorage.setItem("radiaProducts",JSON.stringify(products))}catch(e){}}
+function render(){
+ const root=document.getElementById("products");root.innerHTML="";
+ products.forEach((p,i)=>{
+  const card=document.createElement("article");card.className="card";
+  const photo=document.createElement("div");photo.className="photo";
+  if(p.image){const img=document.createElement("img");img.src=p.image;img.alt=p.name;img.style="width:100%;height:110px;object-fit:cover;border-radius:9px";img.onerror=()=>{photo.textContent="🛍️"};photo.appendChild(img)}else photo.textContent=p.emoji||"🛍️";
+  const name=document.createElement("h3");name.textContent=p.name;
+  const desc=document.createElement("div");desc.className="small";desc.textContent=p.description||"";
+  const price=document.createElement("div");price.className="price";price.textContent="৳ "+p.price;
+  const order=document.createElement("button");order.className="btn";order.textContent="অর্ডার করুন";order.onclick=()=>{document.getElementById("orderProduct").value=p.name;document.getElementById("orderForm").scrollIntoView({behavior:"smooth"})};
+  card.append(photo,name,desc,price,order);
+  if(document.getElementById("adminPanel").style.display==="block"){const del=document.createElement("button");del.className="btn secondary";del.textContent="মুছুন";del.onclick=()=>{products.splice(i,1);save();render()};card.appendChild(del)}
+  root.appendChild(card);
+ });
+}
+document.getElementById("adminToggle").onclick=()=>{const p=document.getElementById("adminPanel");p.style.display=p.style.display==="block"?"none":"block";render()};
+document.getElementById("productForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);products.push({name:f.get("name").trim(),price:Number(f.get("price")),image:f.get("image").trim(),description:f.get("description").trim(),emoji:"🛍️"});save();e.target.reset();render();alert("পণ্য যোগ হয়েছে। এই ডিভাইসের ব্রাউজারে সেভ হয়েছে।")};
+document.getElementById("orderForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);const msg="Radia Beauty Corner অর্ডার%0A"+["নাম: "+f.get("customer"),"মোবাইল: "+f.get("phone"),"ঠিকানা: "+f.get("address"),"জেলা/এলাকা: "+f.get("district"),"পণ্য: "+f.get("product"),"পরিমাণ: "+f.get("quantity"),"পেমেন্ট: "+f.get("payment"),"নোট: "+f.get("note")].join("%0A");window.open("https://wa.me/8801804115193?text="+encodeURIComponent(msg.replaceAll("%0A","\n")),"_blank")};
+document.getElementById("exportProducts").onclick=()=>{const blob=new Blob([JSON.stringify(products,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="radia-products.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("year").textContent=new Date().getFullYear();render();
+</script>
+</body>
+</html>

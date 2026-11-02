@@ -106,5 +106,24 @@ document.getElementById("orderForm").onsubmit=e=>{e.preventDefault();const f=new
 document.getElementById("exportProducts").onclick=()=>{const blob=new Blob([JSON.stringify(products,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="radia-products.json";a.click();URL.revokeObjectURL(a.href)};
 document.getElementById("year").textContent=new Date().getFullYear();render();
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAnqQdxqWmLlUYRLOR-cMzVxQTLiCE4W5I",
+  authDomain: "radia-beauty-corner.firebaseapp.com",
+  projectId: "radia-beauty-corner",
+  storageBucket: "radia-beauty-corner.firebasestorage.app",
+  messagingSenderId: "716680099518",
+  appId: "1:716680099518:web:17b4af443328d325dfd0ef"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.radiaDb = db;
+console.log("Radia Firebase Connected");
+</script>
 </body>
 </html>
